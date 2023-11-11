@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Gamekit3D
@@ -20,7 +21,7 @@ namespace Gamekit3D
             public bool invertY;
         }
 
-
+        
         public Transform follow;
         public Transform lookAt;
         public CinemachineFreeLook keyboardAndMouseCamera;
@@ -30,6 +31,8 @@ namespace Gamekit3D
         public InvertSettings controllerInvertSettings;
         public bool allowRuntimeCameraSettingsChanges;
 
+        private PhotonView photonView;
+        
         public CinemachineFreeLook Current
         {
             get { return inputChoice == InputChoice.KeyboardAndMouse ? keyboardAndMouseCamera : controllerCamera; }
@@ -37,36 +40,54 @@ namespace Gamekit3D
 
         void Reset()
         {
-            Transform keyboardAndMouseCameraTransform = transform.Find("KeyboardAndMouseFreeLookRig");
-            if (keyboardAndMouseCameraTransform != null)
-                keyboardAndMouseCamera = keyboardAndMouseCameraTransform.GetComponent<CinemachineFreeLook>();
-
-            Transform controllerCameraTransform = transform.Find("ControllerFreeLookRig");
-            if (controllerCameraTransform != null)
-                controllerCamera = controllerCameraTransform.GetComponent<CinemachineFreeLook>();
-
-            PlayerController playerController = FindObjectOfType<PlayerController>();
-            if (playerController != null && playerController.name == "Ellen")
+            /*if (photonView.IsMine)
             {
-                follow = playerController.transform;
+                Transform keyboardAndMouseCameraTransform = transform.Find("KeyboardAndMouseFreeLookRig");
+                if (keyboardAndMouseCameraTransform != null)
+                    keyboardAndMouseCamera = keyboardAndMouseCameraTransform.GetComponent<CinemachineFreeLook>();
 
-                lookAt = follow.Find("HeadTarget");
+                Transform controllerCameraTransform = transform.Find("ControllerFreeLookRig");
+                if (controllerCameraTransform != null)
+                    controllerCamera = controllerCameraTransform.GetComponent<CinemachineFreeLook>();
 
-                if (playerController.cameraSettings == null)
-                    playerController.cameraSettings = this;
-            }
+                PlayerController playerController = GetComponentInParent<PlayerController>();
+                if (playerController != null && playerController.name == "Ellen")
+                {
+                    follow = playerController.transform;
+
+                    lookAt = follow.Find("HeadTarget");
+
+                    if (playerController.cameraSettings == null)
+                        playerController.cameraSettings = this;
+                }
+            }*/
         }
 
         void Awake()
         {
-            UpdateCameraSettings();
+            photonView = GetComponentInParent<PhotonView>();
+
+            if (photonView == null)
+            {
+                Debug.Log("No photon view");
+                return;
+            }
+            
+            if (photonView.IsMine)
+            {
+                Debug.Log("PhotonView IsMine");
+                UpdateCameraSettings();
+            }
         }
 
         void Update()
         {
-            if (allowRuntimeCameraSettingsChanges)
+            if (photonView.IsMine)
             {
-                UpdateCameraSettings();
+                if (allowRuntimeCameraSettingsChanges)
+                {
+                    UpdateCameraSettings();
+                }
             }
         }
 

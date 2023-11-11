@@ -17,8 +17,12 @@ namespace Gamekit3D.SkyboxVolume
 
         void Start()
         {
-            camera.clearFlags = CameraClearFlags.Depth;
-            cameraTransform = camera.transform;
+            if (camera != null)
+            {
+                camera.clearFlags = CameraClearFlags.Depth;
+                cameraTransform = camera.transform;
+            }
+            
             skyCam = GetComponent<Camera>();
         }
 
@@ -30,6 +34,13 @@ namespace Gamekit3D.SkyboxVolume
                 transform.rotation = cameraTransform.rotation;
                 transform.localPosition = cameraTransform.position * movementCoefficient;
             }
+        }
+
+        public void SetCamera(Camera playerCamera)
+        {
+            camera = playerCamera;
+            camera.clearFlags = CameraClearFlags.Depth;
+            cameraTransform = camera.transform;
         }
     }
 }

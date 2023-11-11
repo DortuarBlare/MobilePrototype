@@ -24,7 +24,7 @@ namespace Gamekit3D
         /// <returns>The player controller if visible, null otherwise</returns>
         public PlayerController Detect(Transform detector, bool useHeightDifference = true)
         {
-            //if either the player is not spwned or they are spawning, we do not target them
+            /*//if either the player is not spwned or they are spawning, we do not target them
             if (PlayerController.instance == null || PlayerController.instance.respawning)
                 return null;
 
@@ -60,7 +60,7 @@ namespace Gamekit3D
                     if (canSee)
                         return PlayerController.instance;
                 }
-            }
+            }*/
 
             return null;
         }

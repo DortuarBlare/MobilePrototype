@@ -19,7 +19,7 @@ namespace Gamekit3D
         SerializedProperty m_IdleTimeoutProp;
         SerializedProperty m_CanAttackProp;
 
-        SerializedProperty m_MeleeWeaponProp;
+        //SerializedProperty m_MeleeWeaponProp;
         SerializedProperty m_CameraSettingsProp;
         SerializedProperty m_FootstepPlayerProp;
         SerializedProperty m_HurtAudioPlayerProp;
@@ -60,7 +60,7 @@ namespace Gamekit3D
             m_IdleTimeoutProp = serializedObject.FindProperty("idleTimeout");
             m_CanAttackProp = serializedObject.FindProperty("canAttack");
 
-            m_MeleeWeaponProp = serializedObject.FindProperty("meleeWeapon");
+            //m_MeleeWeaponProp = serializedObject.FindProperty("meleeWeapon");
             m_CameraSettingsProp = serializedObject.FindProperty("cameraSettings");
             m_FootstepPlayerProp = serializedObject.FindProperty("footstepPlayer");
             m_HurtAudioPlayerProp = serializedObject.FindProperty("hurtAudioPlayer");
@@ -90,12 +90,13 @@ namespace Gamekit3D
 
             EditorGUILayout.Space();
 
-            m_MeleeWeaponProp.isExpanded = EditorGUILayout.Foldout(m_MeleeWeaponProp.isExpanded, "References");
+            //m_MeleeWeaponProp.isExpanded = EditorGUILayout.Foldout(m_MeleeWeaponProp.isExpanded, "References");
 
-            if (m_MeleeWeaponProp.isExpanded)
+            //if (m_MeleeWeaponProp.isExpanded)
+            if (true)
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(m_MeleeWeaponProp, m_MeleeWeaponContent);
+                //EditorGUILayout.PropertyField(m_MeleeWeaponProp, m_MeleeWeaponContent);
                 EditorGUILayout.PropertyField(m_CameraSettingsProp, m_CameraSettingsContent);
                 EditorGUILayout.PropertyField(m_FootstepPlayerProp, m_FootstepPlayerContent);
                 EditorGUILayout.PropertyField(m_HurtAudioPlayerProp, m_HurtAudioPlayerContent);

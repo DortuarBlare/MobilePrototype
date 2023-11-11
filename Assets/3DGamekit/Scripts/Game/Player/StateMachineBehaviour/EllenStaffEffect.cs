@@ -13,7 +13,7 @@ namespace Gamekit3D
         {
             PlayerController ctrl = animator.GetComponent<PlayerController>();
 
-            ctrl.meleeWeapon.effects[effectIndex].Activate();
+            //ctrl.meleeWeapon.effects[effectIndex].Activate();
         }
 
     } 

@@ -2,16 +2,17 @@
 using System;
 using System.Collections;
 using Gamekit3D;
+using Photon.Pun;
 
 
 public class PlayerInput : MonoBehaviour
 {
-    public static PlayerInput Instance
+    /*public static PlayerInput Instance
     {
         get { return s_Instance; }
     }
 
-    protected static PlayerInput s_Instance;
+    protected static PlayerInput s_Instance;*/
 
     [HideInInspector]
     public bool playerControllerInputBlocked;
@@ -23,6 +24,8 @@ public class PlayerInput : MonoBehaviour
     protected bool m_Pause;
     protected bool m_ExternalInputBlocked;
 
+    private PhotonView photonView;
+    
     public Vector2 MoveInput
     {
         get
@@ -66,29 +69,34 @@ public class PlayerInput : MonoBehaviour
     void Awake()
     {
         m_AttackInputWait = new WaitForSeconds(k_AttackInputDuration);
-
-        if (s_Instance == null)
+        
+        /*if (s_Instance == null)
             s_Instance = this;
         else if (s_Instance != this)
-            throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
+            throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");*/
+        
+        photonView = GetComponent<PhotonView>();
     }
 
 
     void Update()
     {
-        m_Movement.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        m_Camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        m_Jump = Input.GetButton("Jump");
-
-        if (Input.GetButtonDown("Fire1"))
+        if (photonView.IsMine)
         {
-            if (m_AttackWaitCoroutine != null)
-                StopCoroutine(m_AttackWaitCoroutine);
+            m_Movement.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            m_Camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            m_Jump = Input.GetButton("Jump");
 
-            m_AttackWaitCoroutine = StartCoroutine(AttackWait());
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (m_AttackWaitCoroutine != null)
+                    StopCoroutine(m_AttackWaitCoroutine);
+
+                m_AttackWaitCoroutine = StartCoroutine(AttackWait());
+            }
+
+            m_Pause = Input.GetButtonDown("Pause");
         }
-
-        m_Pause = Input.GetButtonDown ("Pause");
     }
 
     IEnumerator AttackWait()
