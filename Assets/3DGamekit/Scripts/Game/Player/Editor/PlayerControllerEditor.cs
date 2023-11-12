@@ -86,7 +86,7 @@ namespace Gamekit3D
             MinMaxTurnSpeed();
 
             EditorGUILayout.PropertyField(m_IdleTimeoutProp, m_IdleTimeoutContent);
-            EditorGUILayout.PropertyField(m_CanAttackProp, m_CanAttackContent);
+            //EditorGUILayout.PropertyField(m_CanAttackProp, m_CanAttackContent);
 
             EditorGUILayout.Space();
 
