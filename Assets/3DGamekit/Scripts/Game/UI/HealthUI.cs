@@ -12,7 +12,7 @@ namespace Gamekit3D
 
         protected readonly int m_HashActivePara = Animator.StringToHash("Active");
         protected readonly int m_HashInactiveState = Animator.StringToHash("Inactive");
-        protected const float k_HeartIconAnchorWidth = 0.041f;
+        protected const float k_HeartIconAnchorWidth = 0.1f/*0.041f*/;
 
         IEnumerator Start()
         {
