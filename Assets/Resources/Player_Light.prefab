@@ -16376,6 +16376,11 @@ PrefabInstance:
       propertyPath: m_ExcludedPropertiesInInspector.Array.data[6]
       value: m_StandbyUpdate
       objectReference: {fileID: 0}
+    - target: {fileID: 114041579122358958, guid: 1fac0dae54de3224181696b709bb4d66,
+        type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 114203780446379988, guid: 1fac0dae54de3224181696b709bb4d66,
         type: 3}
       propertyPath: antialiasingMode
@@ -16490,6 +16495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Orbits.Array.data[1].m_Radius
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114821708130241382, guid: 1fac0dae54de3224181696b709bb4d66,
+        type: 3}
+      propertyPath: settings.Array.data[1].profile
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114826922023042008, guid: 1fac0dae54de3224181696b709bb4d66,
         type: 3}
