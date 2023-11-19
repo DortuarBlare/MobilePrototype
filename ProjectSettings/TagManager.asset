@@ -7,6 +7,10 @@ TagManager:
   - FlythroughCam
   - Bullet
   - SkyboxCamera
+  - Player_Shadow
+  - Player_Light
+  - PressurePad
+  - LevelFinish
   layers:
   - Default
   - TransparentFX

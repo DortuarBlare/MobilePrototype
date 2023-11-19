@@ -2,8 +2,10 @@ using System;
 using UnityEngine;
 using Gamekit3D.Message;
 using System.Collections;
+using System.Collections.Generic;
 using Photon.Pun;
 using Unity.VisualScripting;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA;
 
@@ -658,6 +660,17 @@ namespace Gamekit3D
             {
                 hurtAudioPlayer.PlayRandomClip();
             }
+
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                "Received damage",
+                new Dictionary<string, object>
+                {
+                    { "Tag", gameObject.tag },
+                    { "Position", transform.position}
+                }
+            );
+            
+            Debug.Log("Analytics result: " + analyticsResult);
         }
 
         // Called by OnReceiveMessage and by DeathVolumes in the scene.
@@ -668,6 +681,17 @@ namespace Gamekit3D
             m_VerticalSpeed = 0f;
             m_Respawning = true;
             m_Damageable.isInvulnerable = true;
+            
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                "Died",
+                new Dictionary<string, object>
+                {
+                    { "Tag", gameObject.tag },
+                    { "Position", transform.position}
+                }
+            );
+            
+            Debug.Log("Analytics result: " + analyticsResult);
         }
 
         protected void SetIsJumping()
