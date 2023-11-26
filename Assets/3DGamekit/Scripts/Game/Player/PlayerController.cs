@@ -4,10 +4,8 @@ using Gamekit3D.Message;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
-using Unity.VisualScripting;
 using UnityEngine.Analytics;
 using UnityEngine.UI;
-using UnityEngine.XR.WSA;
 
 namespace Gamekit3D
 {
@@ -106,6 +104,7 @@ namespace Gamekit3D
         private InputCanvas inputCanvasContainer;
         private FixedJoystick joystick;
         private Button jumpButton;
+        private Button crashButton;
 
         protected bool IsJumping = false;
         
@@ -156,8 +155,13 @@ namespace Gamekit3D
             inputCanvasContainer.inputCanvas.SetActive(true);
             inputCanvasContainer.healthbarCanvas.SetActive(true);
             joystick = GetComponentInChildren<FixedJoystick>();
-            jumpButton = GetComponentInChildren<Button>();
+            
+            var buttons = GetComponentsInChildren<Button>();
+            
+            jumpButton = buttons[0];
             jumpButton.onClick.AddListener(SetIsJumping);
+            crashButton = buttons[1];
+            crashButton.onClick.AddListener(CallCrash);
         }
 
         // Called automatically by Unity after Awake whenever the script is enabled. 
@@ -697,6 +701,11 @@ namespace Gamekit3D
         protected void SetIsJumping()
         {
             IsJumping = true;
+        }
+
+        protected void CallCrash()
+        {
+            throw new Exception("Exception test");
         }
     }
 }
