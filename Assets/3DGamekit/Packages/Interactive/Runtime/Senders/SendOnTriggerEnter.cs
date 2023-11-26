@@ -20,8 +20,8 @@ namespace Gamekit3D.GameCommands
                 
                 Dictionary<string, object> analytics = new Dictionary<string, object>
                 {
-                    { "Triggered object tag", gameObject.tag },
-                    { "Triggered by object tag", other.gameObject.tag },
+                    { "TriggeredObjectTag", gameObject.tag },
+                    { "TriggeredByObjectTag", other.gameObject.tag },
                     { "Position", transform.position }
                 };
                 

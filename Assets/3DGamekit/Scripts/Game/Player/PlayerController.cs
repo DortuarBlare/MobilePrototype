@@ -662,11 +662,11 @@ namespace Gamekit3D
             }
 
             AnalyticsResult analyticsResult = Analytics.CustomEvent(
-                "Received damage",
+                "ReceivedDamage",
                 new Dictionary<string, object>
                 {
                     { "Tag", gameObject.tag },
-                    { "Position", transform.position}
+                    { "Position", transform.position.ToString() }
                 }
             );
             
